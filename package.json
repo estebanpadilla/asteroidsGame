@@ -4,7 +4,7 @@
   "description": "A copy of the old asteroids game.",
   "main": "app.js",
   "scripts": {
-    "start": "browser-sync start --server --files *index.html, app.js, js/bullet.js, js/ship.js, js/alien.js, js/asteroid.js, *css/style.css"
+    "start": "browser-sync start --server --files index.html, app.js,  js/*.js, css/style.css"
   },
   "repository": {
     "type": "git",

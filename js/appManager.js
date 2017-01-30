@@ -32,7 +32,7 @@ function AppManager(goManager, levelManager) {
 
     this.shipColor = '#5B5B5B';
     this.asteroidColor = '#FF2F63';
-    this.alienColor = '#50AB00';
+    this.alienColor = '#0098AB';
 
     this.levelManager.createLevel();
 }

@@ -21,7 +21,7 @@ function Ship(id, position, width, height, color, goManager, svg) {
     this.acceleration = Vector();
 
     this.thrust = 0.1;
-    this.frictionForce = 0.05;
+    this.frictionForce = 0.01;
 
     //Controls
     this.doRight = false;
@@ -46,6 +46,8 @@ function Ship(id, position, width, height, color, goManager, svg) {
 Ship.prototype.update = function () {
 
     this.velocityMag = this.velocity.magnitude();
+    console.log(this.velocityMag);
+
 
     if (this.doRight) {
         this.angle -= this.rotationAngle;
@@ -61,19 +63,17 @@ Ship.prototype.update = function () {
         this.rotationAngle += 0.25;
     }
 
-
     if (!this.doLeft && !this.doRight) {
         this.rotationAngle = 1;
     }
 
     if (this.doThrust) {
-        this.lastAngle = this.angle;
         this.doFriction = true;
-        this.acceleration.setComponents(this.lastAngle, this.thrust);
-        this.friction.setComponents(this.lastAngle, this.frictionForce);
+        this.lastAngle = this.angle;
+        this.acceleration.setComponents(this.angle, this.thrust);
     } else {
         this.doThrust = false;
-        this.acceleration.zero(;)
+        this.acceleration.zero();
         if (this.velocityMag > -0.25 && this.velocityMag < 0.25) {
             this.velocity.zero();
             this.friction.zero();
@@ -81,9 +81,9 @@ Ship.prototype.update = function () {
         }
     }
 
-    // if (this.doFriction) {
-    // this.friction.setComponents(this.lastAngle, this.frictionForce);
-    // }
+    if (this.doFriction) {
+        this.friction.setComponents(this.lastAngle, this.frictionForce);
+    }
 
     if (this.doShoot) {
         this.shootCounter++;
