@@ -1,0 +1,530 @@
+html, body {
+    padding: 0px;
+    margin: 0px;
+    background:#BBFFFC;
+    height:100%;
+    overflow: hidden;
+    font-family: 'Lato';
+}
+
+svg {
+    position: absolute;
+}
+
+canvas {
+    position: absolute;
+}
+
+.scorePanel {
+    position: relative;
+    z-index: 99 !important;
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    justify-content: center;
+    align-items: flex-start;
+    height: 10%;
+    margin-top: 20px;
+}
+
+.pointsPanel {
+    position: relative;
+    z-index: 99 !important;
+    display: flex;
+    flex-direction: column;
+    flex-wrap:wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.scorePanelTitle {
+    font-size: 25px;
+    font-weight: 300;
+    user-select: none;
+}
+
+.points {
+    font-size: 20px;
+    font-weight: 900;
+    margin-left: auto;
+    margin-top: 3px;
+    user-select: none;
+}
+
+.levels {
+    font-size: 20px;
+    font-weight: 900;
+    text-align: right;
+    margin-top: 3px;
+    user-select: none;
+}
+
+.levelPanel {
+    position: relative;
+    z-index: 99 !important;
+    display: flex;
+    flex-direction: column;
+    flex-wrap:wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.vertLine {
+    background: #585858;
+    height: 60px;
+    width: 2px;
+    margin-top: -7px;
+    margin-right: 10px;
+    user-select: none;
+}
+
+.playBtn{
+    color: #5B5B5B;
+    font-family: 'Lato';
+    font-weight: 800;
+    font-size:20px;
+    text-transform: uppercase;
+    letter-spacing: 12px;
+    z-index: 99 !important;
+    border: solid;
+    border-width: 5px;
+    border-color: #5B5B5B;
+    border-radius: 0px;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 40px;
+    height: 80px;
+    background: transparent;
+    user-select: none;
+    outline:0;
+}
+
+div.twitter {
+    cursor: pointer;
+    position: absolute;
+    left: 93%;
+    top: 1%;
+    width: 40px;
+    height: 40px;
+    fill: #585858;
+    z-index: 99 !important;
+}
+
+div.github {
+    cursor: pointer;
+    position: absolute;
+    left: 86.5%;
+    top: 1%;
+    width: 40px;
+    height: 40px;
+    fill: #585858;
+    z-index: 99 !important;
+}
+
+div.lives {
+    position: absolute;
+    left: 20px;
+    top: 94%;
+    width: 20px;
+    height: 20px;
+    fill: #585858;
+    z-index: 99 !important;
+}
+
+.livesTitle {
+    position: absolute;
+    font-family: 'Lato';
+    font-size: 20px;
+    font-weight: 900;
+    left: 50px;
+    top: 93.7%;
+    text-align: right;
+    margin-left: auto;
+    user-select: none;
+    z-index: 99 !important;
+}
+
+
+.line {
+    height: 1px;
+    width:90%;
+    margin-left: 5%;
+    background: #5B5B5B;
+    background-color: #5B5B5B;
+    z-index: 99 !important;
+}
+
+h1 {
+    font-size: 90px;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 0px;
+    color: #50AB00;
+    z-index: 99 !important;
+    user-select: none;
+}
+
+h2 {
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 0px;
+    margin-top: -10px;
+    text-transform: uppercase;
+    letter-spacing: 12px;
+    color: #5B5B5B;
+    z-index: 99 !important;
+    user-select: none;
+}
+
+h3 {
+    font-size: 25px;
+    text-align: center;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    text-transform: uppercase;
+    font-weight: 300;
+    color: #5B5B5B;
+    z-index: 99 !important;
+    user-select: none;
+}
+
+p {
+    font-size: 13px;
+    font-weight: 200;
+    margin-bottom: 0px;
+    text-align: center;
+    color: #5B5B5B;
+    z-index: 99 !important;
+    user-select: none;
+}
+
+.container{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    z-index: 99 !important;
+}
+
+.leftCol{
+    height: 90%;
+    width: 25%;
+    z-index: 99 !important;
+    flex-direction: column;
+}
+
+.centerCol {
+    height: 90%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99 !important;
+    flex-direction: column;
+}
+
+.rightCol {
+    height: 90%;
+    width: 25%;
+    z-index: 99 !important;
+    flex-direction: column;
+}
+
+@media screen and (min-width:1025px){
+    h1 {
+        font-size: 90px;
+    }
+
+    h2 {
+        font-size: 30px;
+        letter-spacing: 10px;
+    }
+
+    h3 {
+        font-size: 35px;
+    }
+
+    p {
+        font-size: 13px;
+    }
+
+    .leftCol{
+        width: 30%;
+    }   
+
+    .centerCol {
+        width: 40%;
+    }
+
+    .rightCol {
+        width: 30%;
+    }
+
+    div.twitter {
+        left: 95%;
+    }
+
+    div.github {
+        left: 90%;
+    }
+}
+
+
+@media screen and (min-width:769px) and (max-width:1024px) {
+    h1 {
+        font-size: 90px;
+    }
+
+    h2 {
+        font-size: 30px;
+        letter-spacing: 10px;
+    }
+
+    h3 {
+        font-size: 35px;
+    }
+
+    p {
+        font-size: 13px;
+    }
+
+    .leftCol{
+        width: 25%;
+    }   
+
+    .centerCol {
+        width: 50%;
+    }
+
+    .rightCol {
+        width: 25%;
+    }
+}
+
+
+@media screen and (min-width:415px) and (max-width:768px) {
+    h1 {
+        font-size: 90px;
+    }
+
+    h2 {
+        font-size: 30px;
+        letter-spacing: 10px;
+    }
+
+    h3 {
+        font-size: 35px;
+    }
+
+    p {
+        font-size: 13px;
+    }
+
+    .leftCol{
+        width: 20%;
+    }   
+
+    .centerCol {
+        width: 60%;
+    }
+
+    .rightCol {
+        width: 20%;
+    }
+}
+
+@media screen and (min-width:376px) and (max-width:414px) {
+    h1 {
+        font-size: 80px;
+    }
+
+    h2 {
+        font-size: 22px;
+        letter-spacing: 10px;
+    }
+
+    h3 {
+        font-size: 25px;
+    }
+
+    p {
+        font-size: 13px;
+    }
+    
+    .line {
+        width:98%;
+        margin-left: 1%;
+    }
+
+    .leftCol{
+        width: 10%;
+    }   
+
+    .centerCol {
+        width: 80%;
+    }
+
+    .rightCol {
+        width: 10%;
+    }
+
+    div.github {
+        left:80%;
+        width: 30px;
+        height: 30px;
+    }
+    
+    div.twitter {
+        left:90%;
+        width: 30px;
+        height: 30px;
+    }
+
+    .points {
+        font-size: 15px;
+    }
+
+    .levels {
+        font-size: 15px;
+    }
+
+    .scorePanelTitle {
+        font-size: 17px;
+    }
+
+    .vertLine {
+        height: 42px;
+    }
+    
+}
+
+
+@media screen and (min-width:321px) and (max-width:375px) {
+    h1 {
+        font-size: 70px;
+    }
+
+    h2 {
+        font-size: 20px;
+        letter-spacing: 8px;
+    }
+
+    h3 {
+        font-size: 23px;
+    }
+
+    p {
+        font-size: 13px;
+    }
+    
+    .line {
+        width:98%;
+        margin-left: 1%;
+    }
+
+    .leftCol{
+        width: 10%;
+    }   
+
+    .centerCol {
+        width: 80%;
+    }
+
+    .rightCol {
+        width: 10%;
+    }
+
+    div.github {
+        left:80%;
+        width: 30px;
+        height: 30px;
+    }
+    
+    div.twitter {
+        left:90%;
+        width: 30px;
+        height: 30px;
+    }
+
+    .points {
+        font-size: 15px;
+    }
+
+    .levels {
+        font-size: 15px;
+    }
+
+    .scorePanelTitle {
+        font-size: 17px;
+    }
+
+    .vertLine {
+        height: 42px;
+    }
+}
+
+@media screen and (min-width:300px) and (max-width:320px) {
+    h1 {
+        font-size: 60px;
+    }
+
+    h2 {
+        font-size: 18px;
+        letter-spacing: 8px;
+    }
+
+    h3 {
+        font-size: 20px;
+    }
+
+    p {
+        font-size: 12px;
+    }
+    
+    .line {
+        width:98%;
+        margin-left: 1%;
+    }
+
+    .leftCol{
+        width: 5%;
+    }   
+
+    .centerCol {
+        width: 90%;
+    }
+
+    .rightCol {
+        width: 5%;
+    }
+
+    div.github {
+        left:85%;
+        width: 30px;
+        height: 30px;
+    }
+    
+    div.twitter {
+        left:95%;
+        width: 30px;
+        height: 30px;
+    }
+
+    .points {
+        font-size: 15px;
+    }
+
+    .levels {
+        font-size: 15px;
+    }
+
+    .scorePanelTitle {
+        font-size: 17px;
+    }
+
+    .vertLine {
+        height: 42px;
+    }
+}
+
+

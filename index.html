@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Asteroids</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="bower_components/ludusy/js/appcolors.js"></script>
+    <script src="bower_components/ludusy/js/tools.js"></script>
+    <script src="bower_components/ludusy/js/vector.js"></script>
+    <script src="js/stats.js"></script>
+    <script src="js/ship.js"></script>
+    <script src="js/asteroid.js"></script>
+    <script src="js/bullet.js"></script>
+    <script src="js/alien.js"></script>
+    <script src="js/appManager.js"></script>
+    <script src="js/levelManager.js"></script>
+    <script src="js/goManager.js"></script>
+    <script src="app.js"></script>
+</head>
+
+<body>
+    <h3 id="livesTitle" class="livesTitle">
+        5
+    </h3>
+    <div class="lives">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
+            <path d="M83.333 83.333v-41.666h-20.833v-41.667h-20.833v41.667h-20.834v41.666h-20.833v20.834h104.167v-20.834h-20.834z" />
+        </svg>
+    </div>
+
+    <div id="twitter" class="twitter">
+        <svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
+            <path d="M59.422 111.088c32.248 0 49.884-26.715 49.884-49.885 0-.757-.018-1.515-.048-2.266 3.418-2.473 6.394-5.564 8.745-9.079-3.145 1.4-6.521 2.339-10.072 2.764 3.624-2.17 6.4-5.606 7.709-9.697-3.388 2.006-7.14 3.466-11.127 4.254-3.2-3.412-7.758-5.539-12.8-5.539-9.685 0-17.534 7.848-17.534 17.527 0 1.376.152 2.715.455 4-14.57-.733-27.491-7.709-36.14-18.315-1.509 2.588-2.376 5.6-2.376 8.812 0 6.079 3.097 11.449 7.807 14.594-2.879-.091-5.582-.879-7.946-2.194v.224c0 8.491 6.043 15.576 14.067 17.188-1.473.4-3.024.612-4.624.612-1.128 0-2.231-.109-3.297-.315 2.23 6.964 8.703 12.037 16.381 12.176-6.006 4.703-13.563 7.509-21.775 7.509-1.419 0-2.813-.085-4.182-.242 7.757 4.969 16.97 7.872 26.873 7.872m77.672-73.666c31.916 66.472-33.2 131.588-99.666 99.672-12.673-6.084-22.982-16.394-29.067-29.066-31.915-66.467 33.2-131.582 99.673-99.667 12.666 6.085 22.976 16.394 29.06 29.061"
+            />
+        </svg>
+    </div>
+    <div id="github" class="github">
+        <svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+            <path d="M72.721 0c-40.157 0-72.721 32.564-72.721 72.733 0 32.128 20.836 59.388 49.739 69.007 3.637.666 4.964-1.582 4.964-3.509 0-1.728-.067-6.297-.097-12.37-20.23 4.4-24.503-9.746-24.503-9.746-3.303-8.406-8.073-10.642-8.073-10.642-6.606-4.509.497-4.418.497-4.418 7.303.515 11.14 7.497 11.14 7.497 6.491 11.109 17.024 7.903 21.169 6.042.661-4.703 2.54-7.909 4.619-9.727-16.152-1.83-33.128-8.073-33.128-35.94 0-7.939 2.831-14.436 7.485-19.515-.751-1.842-3.242-9.236.709-19.248 0 0 6.109-1.958 20 7.454 5.8-1.612 12.025-2.418 18.206-2.448 6.182.03 12.4.836 18.213 2.448 13.884-9.412 19.975-7.454 19.975-7.454 3.97 10.012 1.473 17.406.728 19.248 4.66 5.079 7.472 11.576 7.472 19.515 0 27.94-17 34.085-33.206 35.885 2.612 2.249 4.94 6.685 4.94 13.467 0 9.727-.091 17.57-.091 19.952 0 1.945 1.309 4.212 5 3.496 28.879-9.636 49.697-36.872 49.697-68.994 0-40.169-32.564-72.733-72.734-72.733"
+            />
+        </svg>
+    </div>
+
+
+    <div id="scorePanel" class="scorePanel">
+        <div class="pointsPanel">
+            <h2 class="scorePanelTitle">POINTS</h2>
+            <h2 id="scoreTitle" class="points">1000000</h2>
+        </div>
+        <div class="vertLine">
+        </div>
+        <div class="levelPanel">
+            <h2 class="scorePanelTitle">LEVEL</h2>
+            <h2 id="levelTitle" class="levels">1</h2>
+        </div>
+    </div>
+    <div class="container">
+        <div class="leftCol">
+        </div>
+        <div class="centerCol">
+            <div>
+                <h1 id="title">Asteroids</h1>
+                <h2 id="subtitle1">Using only svgs</h2>
+                <div id="line" class="line">
+                </div>
+                <h3 id="subtitle2">A remake of the classic</h3>
+                <p id="text">The reason begin this project is very simple I wanted to make a small game using only SVGs and Asteroids
+                    is the first game I ever played so why not making a clone with a small twist, there is still a lot more
+                    to be done and polish but I think I accomplished my goals already. I feel SVGs has a lot more to offer
+                    and I get the feeling that this is the beginning of something really cool. </p>
+                <button id="playBtn" class="playBtn">PLAY</button>
+            </div>
+        </div>
+        <div class="rightCol">
+        </div>
+    </div>
+
+</body>
+
+</html>

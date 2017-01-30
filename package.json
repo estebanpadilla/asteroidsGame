@@ -1,0 +1,23 @@
+{
+  "name": "asteroids-game",
+  "version": "1.0.0",
+  "description": "A copy of the old asteroids game.",
+  "main": "app.js",
+  "scripts": {
+    "start": "browser-sync start --server --files *index.html, app.js, js/bullet.js, js/ship.js, js/alien.js, js/asteroid.js, *css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/estebanpadilla/asteroids.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/estebanpadilla/asteroids/issues"
+  },
+  "homepage": "https://github.com/estebanpadilla/asteroids#readme",
+  "devDependencies": {
+    "browser-sync": "^2.18.6"
+  }
+}
