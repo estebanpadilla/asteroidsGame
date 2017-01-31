@@ -274,7 +274,7 @@ GOManager.prototype.removeShip = function (go) {
 GOManager.prototype.cleanForNewLevel = function () {
     this.cleanAsteroids();
     // this.cleanAliens();
-    this.cleanBullets();
+    // this.cleanBullets();
     this.cleanAlienBullets();
 }
 

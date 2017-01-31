@@ -5,6 +5,8 @@ function init() {
     var stats = new Stats();
     stats.showPanel(0);
     document.body.appendChild(stats.dom);
+    stats.dom.style.position = 'absolute';
+    stats.dom.style.top = '' + 100 + 'px';
 
     let goManager = GOManager(),
         levelManager = LevelManager(),

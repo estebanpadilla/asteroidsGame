@@ -124,9 +124,9 @@ div.github {
 div.lives {
     position: absolute;
     left: 20px;
-    top: 94%;
-    width: 20px;
-    height: 20px;
+    top: 20px;
+    width: 25px;
+    height: 25px;
     fill: #5B5B5B;
     z-index: 99 !important;
 }
@@ -134,10 +134,10 @@ div.lives {
 .livesTitle {
     position: absolute;
     font-family: 'Lato';
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 900;
-    left: 50px;
-    top: 93.7%;
+    left: 55px;
+    top: 13px;
     text-align: right;
     margin-left: auto;
     user-select: none;
@@ -260,12 +260,18 @@ p {
         width: 30%;
     }
 
-    div.twitter {
-        left: 96%;
-    }
-
     div.github {
-        left: 96%;
+        left:94%;
+        top:70px;
+        width: 50px;
+        height: 50px;
+    }
+    
+    div.twitter {
+        left:94%;
+        top:10px;
+        width: 50px;
+        height: 50px;
     }
 }
 
@@ -289,17 +295,17 @@ p {
     }
 
     div.github {
-        left:93%;
-        top:8%;
-        width: 40px;
-        height: 40px;
+        left:94%;
+        top:70px;
+        width: 50px;
+        height: 50px;
     }
     
     div.twitter {
-        left:93%;
-        top:2%;
-        width: 40px;
-        height: 40px;
+        left:94%;
+        top:10px;
+        width: 50px;
+        height: 50px;
     }
 
     .leftCol{
@@ -334,16 +340,18 @@ p {
         font-size: 13px;
     }
 
-    div.github {
-        left:88%;
-        width: 40px;
-        height: 40px;
-    }
-    
     div.twitter {
-        left:88%;
-        width: 40px;
-        height: 40px;
+        left:92%;
+        top:10px;
+        width: 50px;
+        height: 50px;
+    }
+
+    div.github {
+        left:92%;
+        top:70px;
+        width: 50px;
+        height: 50px;
     }
 
     .leftCol{
@@ -460,14 +468,16 @@ p {
         width: 10%;
     }
 
-    div.github {
+    div.twitter {
         left:88%;
+        top:10px;
         width: 35px;
         height: 35px;
     }
-    
-    div.twitter {
+
+    div.github {
         left:88%;
+        top:50px;
         width: 35px;
         height: 35px;
     }
@@ -523,17 +533,19 @@ p {
     .rightCol {
         width: 5%;
     }
-
-    div.github {
-        left:88%;
-        width: 30px;
-        height: 30px;
-    }
     
     div.twitter {
         left:88%;
-        width: 30px;
-        height: 30px;
+        top:5px;
+        width: 35px;
+        height: 35px;
+    }
+
+      div.github {
+        left:88%;
+        top:45px;
+        width: 35px;
+        height: 35px;
     }
 
     .points {

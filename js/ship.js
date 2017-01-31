@@ -28,7 +28,7 @@ function Ship(id, position, width, height, color, goManager, svg) {
     this.acceleration = Vector();
 
     this.thrust = 0.1;
-    this.frictionForce = 0.01;
+    this.frictionForce = 0.03;
 
     //Controls
     this.doRight = false;
@@ -46,14 +46,19 @@ function Ship(id, position, width, height, color, goManager, svg) {
     this.render();
     this.update();
     this.rotationAngle = 1;
-    this.isInvisible = false;
+    this.isInvisible = true;
     this.lastAngle = 0;
 }
 
 Ship.prototype.update = function () {
 
     this.velocityMag = this.velocity.magnitude();
-    // console.log(this.velocityMag);
+    console.log(this.velocityMag);
+
+
+    // this.velocity.setComponents(this.velocity.angle(), 3);
+    // this.velocity.normalize();
+
 
 
     if (this.doRight) {
@@ -75,22 +80,32 @@ Ship.prototype.update = function () {
     }
 
     if (this.doThrust) {
-        this.doFriction = true;
-        this.lastAngle = this.angle;
+
+
         this.acceleration.setComponents(this.angle, this.thrust);
         this.animateThrust();
+
+        if (this.lastAngle != this.angle) {
+            this.velocity.remove(this.acceleration);
+        }
+
+        this.lastAngle = this.angle;
     } else {
+        // this.acceleration.normalize();
+
         this.resetThrust();
-        // this.doThrust = false;
+        this.doFriction = true;
         this.acceleration.zero();
-        if (this.velocityMag > -0.25 && this.velocityMag < 0.25) {
+        if (this.velocityMag > -0.75 && this.velocityMag < 0.75) {
             this.velocity.zero();
             this.friction.zero();
             this.doFriction = false;
         }
     }
 
+
     if (this.doFriction) {
+        console.log('do friction');
         this.friction.setComponents(this.lastAngle, this.frictionForce);
     }
 
