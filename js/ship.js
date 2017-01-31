@@ -7,6 +7,13 @@ function Ship(id, position, width, height, color, goManager, svg) {
     this.svg = svg;
     this.polygone;
     this.group;
+    this.fire1;
+    this.fire2;
+    this.fire = 0;
+    this.fireMax = 10;
+    this.fireUp = true;
+    this.fireDown = false;
+    this.fireReset = false;
 
     this.originalPos = Vector(position.x, position.y);
     this.position = position;
@@ -46,21 +53,21 @@ function Ship(id, position, width, height, color, goManager, svg) {
 Ship.prototype.update = function () {
 
     this.velocityMag = this.velocity.magnitude();
-    console.log(this.velocityMag);
+    // console.log(this.velocityMag);
 
 
     if (this.doRight) {
         this.angle -= this.rotationAngle;
         // this.rotate()
         // this.velocity.setComponents(this.angle, this.velocityMag);
-        this.rotationAngle += 0.25;
+        this.rotationAngle += 0.2;
     }
 
     if (this.doLeft) {
         this.angle += this.rotationAngle;
         // this.rotate();
         // this.velocity.setComponents(this.angle, this.velocityMag);
-        this.rotationAngle += 0.25;
+        this.rotationAngle += 0.2;
     }
 
     if (!this.doLeft && !this.doRight) {
@@ -71,8 +78,10 @@ Ship.prototype.update = function () {
         this.doFriction = true;
         this.lastAngle = this.angle;
         this.acceleration.setComponents(this.angle, this.thrust);
+        this.animateThrust();
     } else {
-        this.doThrust = false;
+        this.resetThrust();
+        // this.doThrust = false;
         this.acceleration.zero();
         if (this.velocityMag > -0.25 && this.velocityMag < 0.25) {
             this.velocity.zero();
@@ -101,15 +110,78 @@ Ship.prototype.update = function () {
     this.group.setAttribute('transform', 'translate(' + this.position.x + ' ' + this.position.y + ') rotate(' + this.angle + ' ' + ((this.width / 2) - 4) + ' ' + (this.height / 2) + ')');
 }
 
+Ship.prototype.animateThrust = function () {
+
+    if (this.fireUp) {
+        if (this.fire <= this.fireMax) {
+            this.fire += 1;
+            this.fire1.setAttribute('width', this.fire);
+            this.fire1.setAttribute('x', (-this.fire + 5));
+            this.fire2.setAttribute('width', (this.fire + 5));
+            this.fire2.setAttribute('x', (-this.fire));
+        } else {
+            this.fireDown = true;
+            this.fireUp = false;
+        }
+    }
+
+    if (this.fireDown) {
+        if (this.fire <= 5) {
+            this.fireDown = false;
+            this.fireUp = true;
+
+        } else {
+            this.fire -= 2;
+            this.fire1.setAttribute('width', this.fire);
+            this.fire1.setAttribute('x', (-this.fire + 5));
+            this.fire2.setAttribute('width', (this.fire + 5));
+            this.fire2.setAttribute('x', (-this.fire));
+        }
+    }
+
+    this.fireReset = false;
+}
+
+Ship.prototype.resetThrust = function () {
+    if (!this.fireReset) {
+        this.fireReset = true;
+        this.fire1.setAttribute('width', 0);
+        this.fire1.setAttribute('x', 5);
+        this.fire2.setAttribute('width', 0);
+        this.fire2.setAttribute('x', 5);
+    }
+}
+
 Ship.prototype.render = function () {
     let xmlns = "http://www.w3.org/2000/svg";
     this.group = document.createElementNS(xmlns, 'g');
     this.svg.appendChild(this.group);
 
+
+
+
     this.polygone = document.createElementNS(xmlns, 'polygon');
     this.polygone.setAttribute('fill', this.color);
     this.polygone.setAttribute('points', '12.5,27.5 22.5,27.5 22.5,22.5 32.5,22.5 32.5,17.5 22.5,17.5 22.5,12.5 12.5,12.5 12.5,7.5 7.5,7.5 7.5,32.5 12.5,32.5');
     this.group.appendChild(this.polygone);
+
+    this.fire1 = document.createElementNS(xmlns, 'rect');
+    this.fire1.setAttribute('x', 5);
+    this.fire1.setAttribute('y', 13);
+    this.fire1.setAttribute('width', 5);
+    this.fire1.setAttribute('height', 15);
+    this.fire1.setAttribute('fill', '#FFD22F');
+    this.group.appendChild(this.fire1);
+
+
+    this.fire2 = document.createElementNS(xmlns, 'rect');
+    this.fire2.setAttribute('x', 5);
+    this.fire2.setAttribute('y', 18);
+    this.fire2.setAttribute('width', 5);
+    this.fire2.setAttribute('height', 5);
+    this.fire2.setAttribute('fill', '#FF922F');
+    this.group.appendChild(this.fire2);
+
 }
 
 Ship.prototype.rotate = function () {

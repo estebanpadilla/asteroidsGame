@@ -40,10 +40,10 @@ function Alien(id, position, direction, speed, type, color, goManager, svg) {
         this.price = 150;
     } else {
         //Big 1
-        this.points = '45,10 45,5 35,5 35,0 15,0 15,5 5,5 5,10 0,10 0,15 5,15 5,20 10,20 10,25 40,25 40,20 45,20 45,15 50,15 50,10';
-        this.width = 50;
-        this.height = 25;
-        this.price = 50;
+        this.points = '20,10 20,5 15,5 15,0 10,0 10,5 5,5 5,10 0,10 0,15 5,15 5,20 20,20 20,15 25,15 25,10';
+        this.width = 25;
+        this.height = 20;
+        this.price = 150;
     }
 
     // this.removeAlien = removeAlien;
@@ -53,11 +53,12 @@ function Alien(id, position, direction, speed, type, color, goManager, svg) {
     this.shootUp = false;
     this.shootDown = false;
 
-    let _this = this;
-    this.timer = setTimeout(function () {
-        _this.shoot(_this);
-    }, 100);
+    // let _this = this;
+    // this.timer = setTimeout(function () {
+    //     _this.shoot(_this);
+    // }, 500);
 
+    this.shoot();
 
     if (this.position.y < window.innerHeight / 2) {
         this.shootDown = true;
@@ -67,19 +68,25 @@ function Alien(id, position, direction, speed, type, color, goManager, svg) {
 }
 
 Alien.prototype.shoot = function () {
-    this.goManager.addAlienBullet(this);
     let _this = this;
-    this.timer = setTimeout(function () {
+    if (_this.position.y > window.innerHeight / 2) {
+        _this.shootUp = true;
+        _this.shootDown = false;
+    } else {
+        _this.shootDown = true;
+        _this.shootUp = false;
+    }
+
+    clearTimeout(_this.timer);
+
+    _this.timer = setTimeout(function () {
+        _this.goManager.addAlienBullet(_this);
         _this.shoot();
-    }, 800);
+    }, 3000);
 }
 
 Alien.prototype.update = function () {
     this.position.add(this.velocity);
-
-    if (this.position.y > window.innerHeight / 2) {
-        this.shootUp = true;
-    }
 
     this.checkBoundaries();
     if (!this.isRemove) {
@@ -92,10 +99,59 @@ Alien.prototype.render = function () {
     this.group = document.createElementNS(xmlns, 'g');
     this.group.setAttribute('fill', this.color);
     this.svg.appendChild(this.group);
-
     this.polygone = document.createElementNS(xmlns, 'polygon');
     this.polygone.setAttribute('points', this.points);
     this.group.appendChild(this.polygone);
+
+    if (this.type == 1) {
+        let rect1 = document.createElementNS(xmlns, 'rect');
+        rect1.setAttribute('x', 10);
+        rect1.setAttribute('y', 10);
+        rect1.setAttribute('width', 5);
+        rect1.setAttribute('height', 5);
+        rect1.setAttribute('fill', '#FF2F63');
+        this.group.appendChild(rect1);
+
+        let rect2 = document.createElementNS(xmlns, 'rect');
+        rect2.setAttribute('x', 20);
+        rect2.setAttribute('y', 10);
+        rect2.setAttribute('width', 10);
+        rect2.setAttribute('height', 5);
+        rect2.setAttribute('fill', '#FF2F63');
+        this.group.appendChild(rect2);
+
+        let rect3 = document.createElementNS(xmlns, 'rect');
+        rect3.setAttribute('x', 35);
+        rect3.setAttribute('y', 10);
+        rect3.setAttribute('width', 5);
+        rect3.setAttribute('height', 5);
+        rect3.setAttribute('fill', '#FF2F63');
+        this.group.appendChild(rect3);
+    } else if (this.type == 2) {
+        let rect1 = document.createElementNS(xmlns, 'rect');
+        rect1.setAttribute('x', 10);
+        rect1.setAttribute('y', 10);
+        rect1.setAttribute('width', 5);
+        rect1.setAttribute('height', 5);
+        rect1.setAttribute('fill', '#FF2F63');
+        this.group.appendChild(rect1);
+
+        let rect2 = document.createElementNS(xmlns, 'rect');
+        rect2.setAttribute('x', 25);
+        rect2.setAttribute('y', 10);
+        rect2.setAttribute('width', 5);
+        rect2.setAttribute('height', 5);
+        rect2.setAttribute('fill', '#FF2F63');
+        this.group.appendChild(rect2);
+    } else {
+        let rect1 = document.createElementNS(xmlns, 'rect');
+        rect1.setAttribute('x', 10);
+        rect1.setAttribute('y', 10);
+        rect1.setAttribute('width', 5);
+        rect1.setAttribute('height', 5);
+        rect1.setAttribute('fill', '#FF2F63');
+        this.group.appendChild(rect1);
+    }
 }
 
 Alien.prototype.rotate = function () {
@@ -103,11 +159,28 @@ Alien.prototype.rotate = function () {
 };
 
 Alien.prototype.checkBoundaries = function () {
-    if (this.position.x > (window.innerWidth + this.width) ||
-        this.position.x < (0 - this.width) ||
-        this.position.y > (window.innerHeight + this.height) ||
-        this.position.y < (0 - this.height)) {
-        this.remove();
+    // if (this.position.x > (window.innerWidth + this.width) ||
+    //     this.position.x < (0 - this.width) ||
+    //     this.position.y > (window.innerHeight + this.height) ||
+    //     this.position.y < (0 - this.height)) {
+    //     this.remove();
+    // }
+
+
+    if (this.position.x > (window.innerWidth + this.width)) {
+        this.position.x = (0 - this.width);
+    }
+
+    if (this.position.x < (0 - this.width)) {
+        this.position.x = window.innerWidth;
+    }
+
+    if (this.position.y > (window.innerHeight + this.height)) {
+        this.position.y = (0 - this.height);
+    }
+
+    if (this.position.y < (0 - this.height)) {
+        this.position.y = window.innerHeight;
     }
 }
 

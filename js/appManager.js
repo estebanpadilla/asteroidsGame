@@ -20,7 +20,7 @@ function AppManager(goManager, levelManager) {
     this.twitter = null;// document.getElementById('twitter');
     this.livesTitle = null;//document.getElementById('livesTitle');
 
-    this.lives = 5;
+    this.lives = 1;
     this.score = 0;
     this.scoreForLife = 0;
     this.asteroidBig = 10;
@@ -39,7 +39,7 @@ function AppManager(goManager, levelManager) {
 
 AppManager.prototype.startBtnClick = function (e) {
 
-    this.lives = 5
+    this.lives = 3;
     this.score = 0;
     this.scoreForLife = 0;
     this.levelManager.level = 0;
@@ -109,6 +109,7 @@ AppManager.prototype.shipHit = function () {
     if (this.lives == 0) {
         this.gameEnd();
     } else {
+        this.goManager.ship.reset();
         this.updateLivesTitle(-1);
     }
     return true;
@@ -116,8 +117,9 @@ AppManager.prototype.shipHit = function () {
 
 
 AppManager.prototype.gameEnd = function () {
-    ship.remove();
-    THIS.startBtn.disabled = false;
+
+    this.goManager.ship.remove();
+    this.startBtn.disabled = false;
     this.startBtn.style.opacity = 1;
     this.title.style.opacity = 1;
     this.subtitle1.style.opacity = 1;
@@ -132,5 +134,4 @@ AppManager.prototype.gameEnd = function () {
     this.subtitle2.style.transition = 'opacity 1s ease-in';
     this.text.style.transition = 'opacity 1s ease-in';
     this.line.style.transition = 'opacity 1s ease-in';
-
 }

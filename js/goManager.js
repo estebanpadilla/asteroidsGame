@@ -55,19 +55,25 @@ GOManager.prototype.update = function () {
 
     for (let asteroid of this.poolAsteroids.values()) {
 
+        asteroid.update();
+
         if (this.ship != null) {
             if (!this.ship.isInvisible) {
                 if (hitRectOnRect(asteroid.getBounds(), this.ship.getBounds())) {
                     this.addAsteroidOnBulletHit(asteroid);
-                    if (this.appManager.shipHit()) {
-                        this.ship.reset();
-                    }
+                    this.appManager.shipHit();
                     break;
                 }
             }
         }
 
-        asteroid.update();
+        for (let alien of this.poolAliens.values()) {
+            if (hitRectOnRect(asteroid.getBounds(), alien.getBounds())) {
+                this.addAsteroidOnBulletHit(asteroid);
+                alien.remove()
+                break;
+            }
+        }
     }
 
     for (let alien of this.poolAliens.values()) {
@@ -76,20 +82,33 @@ GOManager.prototype.update = function () {
 
     for (let bullet of this.poolAlienBullets.values()) {
         bullet.update();
-        /*
+
+        if (!bullet.isRemove) {
+            for (let asteroid of this.poolAsteroids.values()) {
+                if (hitPointOnRect(bullet.position.x, bullet.position.y, asteroid.getBounds())) {
+                    bullet.remove();
+                    this.addAsteroidOnBulletHit(asteroid);
+                    break;
+                }
+            }
+        }
+
         if (this.ship != null) {
             if (!this.ship.isInvisible) {
                 if (!bullet.isRemove) {
                     if (this.ship != null) {
                         if (hitPointOnRect(bullet.position.x, bullet.position.y, this.ship.getBounds())) {
-                            // gameEnd();
+                            if (this.appManager.shipHit()) {
+                                bullet.remove();
+                                // this.ship.reset();
+                            }
                             break;
                         }
                     }
                 }
             }
         }
-        */
+
     }
 
     if (this.ship != null) {
@@ -123,9 +142,13 @@ GOManager.prototype.addAlienBullet = function (alien) {
         position = Vector(alien.position.x + (alien.width / 2), (alien.position.y + alien.height));
     }
 
+    if (this.ship != null) {
+        direction = toDegrees(alien.position.angleTo(this.ship.position));
+    }
+
     // let shootPosition = Vector(alien.position.x, alien.position.y);
     this.goCounter++;
-    let bullet = Bullet(this.goCounter, position, direction, randomBtween(2, 5), alien.color, this, true, this.svg);
+    let bullet = Bullet(this.goCounter, position, direction, 5, alien.color, this, true, this.svg);
     this.poolAlienBullets.set(this.goCounter, bullet);
 }
 
@@ -164,19 +187,23 @@ GOManager.prototype.addAsteroidOnBulletHit = function (asteroid) {
 
     if (asteroid.type == 3 || asteroid.type == 4) {
         this.goCounter++;
-        let asteroid1 = Asteroid(this.goCounter, Vector(asteroid.position.x, asteroid.position.y), randomBtween(0, 360), randomBtween(1, 3), 2, this.appManager.asteroidColor, this, this.svg);
+        let direction = randomBtween(0, 360);
+        let asteroid1 = Asteroid(this.goCounter, Vector(asteroid.position.x, asteroid.position.y), direction, randomBtween(1, 3), 2, this.appManager.asteroidColor, this, this.svg);
         this.poolAsteroids.set(this.goCounter, asteroid1);
 
+        direction = randomBtween(direction, 360);
         this.goCounter++;
-        let asteroid2 = Asteroid(this.goCounter, Vector(asteroid.position.x, asteroid.position.y), randomBtween(20, 340), randomBtween(1, 3), 2, this.appManager.asteroidColor, this, this.svg);
+        let asteroid2 = Asteroid(this.goCounter, Vector(asteroid.position.x, asteroid.position.y), direction, randomBtween(1, 3), 2, this.appManager.asteroidColor, this, this.svg);
         this.poolAsteroids.set(this.goCounter, asteroid2);
     } else if (asteroid.type == 2) {
         this.goCounter++;
-        let asteroid1 = Asteroid(this.goCounter, Vector(asteroid.position.x, asteroid.position.y), randomBtween(20, 340), randomBtween(1, 3), 1, this.appManager.asteroidColor, this, this.svg);
+        let direction = randomBtween(0, 360);
+        let asteroid1 = Asteroid(this.goCounter, Vector(asteroid.position.x, asteroid.position.y), direction, randomBtween(1, 3), 1, this.appManager.asteroidColor, this, this.svg);
         this.poolAsteroids.set(this.goCounter, asteroid1);
 
         this.goCounter++;
-        let asteroid2 = Asteroid(this.goCounter, Vector(asteroid.position.x, asteroid.position.y), randomBtween(20, 340), randomBtween(1, 3), 1, this.appManager.asteroidColor, this, this.svg);
+        direction = randomBtween(direction, 360);
+        let asteroid2 = Asteroid(this.goCounter, Vector(asteroid.position.x, asteroid.position.y), direction, randomBtween(1, 3), 1, this.appManager.asteroidColor, this, this.svg);
         this.poolAsteroids.set(this.goCounter, asteroid2);
     }
 
@@ -190,14 +217,15 @@ GOManager.prototype.addAsteroidOnBulletHit = function (asteroid) {
 
 GOManager.prototype.addAlien = function () {
 
+    console.log('add alien');
 
     let y = 0;
     let x = 0;
     let direction = 0;
 
-    let i = randomBtween(0.20);
+    let i = randomBtween(0, 20);
     if (i % 2 == 0) {
-        x = 0;
+        x = -50;
         y = randomBtween(50, this.height - 50);
         direction = randomBtween(-45, 45);
     } else {
@@ -210,9 +238,9 @@ GOManager.prototype.addAlien = function () {
     let position = Vector(x, y);
 
     this.goCounter++;
-    let alien = Alien(this.goCounter, position, direction, randomBtween(1, 3), randomBtween(1, 3), this.appManager.alienColor, this, this.svg);
+    let alien = Alien(this.goCounter, position, direction, randomBtween(1, 4), randomBtween(1, 4), this.appManager.alienColor, this, this.svg);
     this.poolAliens.set(this.goCounter, alien);
-
+    this.startAlienAttack();
 }
 
 //Remove Methods
@@ -245,7 +273,7 @@ GOManager.prototype.removeShip = function (go) {
 
 GOManager.prototype.cleanForNewLevel = function () {
     this.cleanAsteroids();
-    this.cleanAliens();
+    // this.cleanAliens();
     this.cleanBullets();
     this.cleanAlienBullets();
 }
@@ -277,23 +305,23 @@ GOManager.prototype.cleanAlienBullets = function () {
 }
 
 GOManager.prototype.cleanAliens = function () {
-    this.poolAsteroids.forEach(function (alien) {
+    this.poolAliens.forEach(function (alien) {
         alien.remove();
     }, this);
 }
 
 GOManager.prototype.startAlienAttack = function () {
 
-    console.log('call  add aliem');
-
     let _this = this;
     clearTimeout(_this.alientTimer);
-    let addA = _this.addAlien;
-    let fx = _this.startAlienAttack;
-
+    // let addA = _this.addAlien;
+    // let fx = _this.startAlienAttack;
     _this.alientTimer = setTimeout(function () {
         // _this.startAlienAttack();
-        addA.call(_this, _this);
-        fx.call(_this, _this);
-    }, 10000);
+        _this.addAlien();
+
+        // addA.call(_this, _this);
+        // fx.call(_this, _this);
+    }, 20000);
 }
+

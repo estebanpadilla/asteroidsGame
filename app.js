@@ -37,6 +37,14 @@ function init() {
     appManager.twitter.addEventListener('click', appManager.onTwitter, false);
     appManager.startBtn.onclick = startBtnClick;
 
+    // let twitter = document.getElementById('twitter'),
+    // github = document.getElementById('github');
+
+
+    // twitter.style.left = '' + (window.innerWidth - 40) + 'px';
+    // github.style.left = '' + (window.innerWidth - 80) + 'px';
+
+
     function startBtnClick(e) {
         appManager.startBtnClick(e);
         window.addEventListener('keydown', keydownHandler, false);
