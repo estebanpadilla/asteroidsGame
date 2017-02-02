@@ -104,8 +104,8 @@ div.twitter {
     position: absolute;
     left: 93%;
     top: 2%;
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     fill: #5B5B5B;
     z-index: 99 !important;
 }
@@ -115,6 +115,17 @@ div.github {
     position: absolute;
     left: 93%;
     top: 8%;
+    width: 30px;
+    height: 30px;
+    fill: #5B5B5B;
+    z-index: 99 !important;
+}
+
+div.information {
+    cursor: pointer;
+    position: absolute;
+    left: 96%;
+    top: 94%;
     width: 35px;
     height: 35px;
     fill: #5B5B5B;
@@ -261,17 +272,17 @@ p {
     }
 
     div.github {
-        left:94%;
-        top:70px;
-        width: 50px;
-        height: 50px;
+        left:96.5%;
+        top:65px;
+        width: 40px;
+        height: 40px;
     }
     
     div.twitter {
-        left:94%;
-        top:10px;
-        width: 50px;
-        height: 50px;
+        left:96.5%;
+        top:13px;
+        width: 40px;
+        height: 40px;
     }
 }
 

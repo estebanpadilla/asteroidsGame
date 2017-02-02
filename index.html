@@ -7,17 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <script src="bower_components/ludusy/js/appcolors.js"></script>
     <script src="bower_components/ludusy/js/tools.js"></script>
     <script src="bower_components/ludusy/js/vector.js"></script>
     <script src="js/stats.js"></script>
-    <script src="js/ship.js"></script>
-    <script src="js/asteroid.js"></script>
-    <script src="js/bullet.js"></script>
-    <script src="js/alien.js"></script>
-    <script src="js/appManager.js"></script>
-    <script src="js/levelManager.js"></script>
-    <script src="js/goManager.js"></script>
+    <script src="js/game objects/ship.js"></script>
+    <script src="js/game objects/asteroid.js"></script>
+    <script src="js/game objects/bullet.js"></script>
+    <script src="js/game objects/alien.js"></script>
+    <script src="js/managers/appManager.js"></script>
+    <script src="js/managers/levelManager.js"></script>
+    <script src="js/managers/goManager.js"></script>
     <script src="app.js"></script>
 </head>
 
@@ -38,6 +37,12 @@
         </svg>
     </div>
     <div id="github" class="github">
+        <svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+            <path d="M72.721 0c-40.157 0-72.721 32.564-72.721 72.733 0 32.128 20.836 59.388 49.739 69.007 3.637.666 4.964-1.582 4.964-3.509 0-1.728-.067-6.297-.097-12.37-20.23 4.4-24.503-9.746-24.503-9.746-3.303-8.406-8.073-10.642-8.073-10.642-6.606-4.509.497-4.418.497-4.418 7.303.515 11.14 7.497 11.14 7.497 6.491 11.109 17.024 7.903 21.169 6.042.661-4.703 2.54-7.909 4.619-9.727-16.152-1.83-33.128-8.073-33.128-35.94 0-7.939 2.831-14.436 7.485-19.515-.751-1.842-3.242-9.236.709-19.248 0 0 6.109-1.958 20 7.454 5.8-1.612 12.025-2.418 18.206-2.448 6.182.03 12.4.836 18.213 2.448 13.884-9.412 19.975-7.454 19.975-7.454 3.97 10.012 1.473 17.406.728 19.248 4.66 5.079 7.472 11.576 7.472 19.515 0 27.94-17 34.085-33.206 35.885 2.612 2.249 4.94 6.685 4.94 13.467 0 9.727-.091 17.57-.091 19.952 0 1.945 1.309 4.212 5 3.496 28.879-9.636 49.697-36.872 49.697-68.994 0-40.169-32.564-72.733-72.734-72.733"
+            />
+        </svg>
+    </div>
+    <div id="information" class="information">
         <svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
             <path d="M72.721 0c-40.157 0-72.721 32.564-72.721 72.733 0 32.128 20.836 59.388 49.739 69.007 3.637.666 4.964-1.582 4.964-3.509 0-1.728-.067-6.297-.097-12.37-20.23 4.4-24.503-9.746-24.503-9.746-3.303-8.406-8.073-10.642-8.073-10.642-6.606-4.509.497-4.418.497-4.418 7.303.515 11.14 7.497 11.14 7.497 6.491 11.109 17.024 7.903 21.169 6.042.661-4.703 2.54-7.909 4.619-9.727-16.152-1.83-33.128-8.073-33.128-35.94 0-7.939 2.831-14.436 7.485-19.515-.751-1.842-3.242-9.236.709-19.248 0 0 6.109-1.958 20 7.454 5.8-1.612 12.025-2.418 18.206-2.448 6.182.03 12.4.836 18.213 2.448 13.884-9.412 19.975-7.454 19.975-7.454 3.97 10.012 1.473 17.406.728 19.248 4.66 5.079 7.472 11.576 7.472 19.515 0 27.94-17 34.085-33.206 35.885 2.612 2.249 4.94 6.685 4.94 13.467 0 9.727-.091 17.57-.091 19.952 0 1.945 1.309 4.212 5 3.496 28.879-9.636 49.697-36.872 49.697-68.994 0-40.169-32.564-72.733-72.734-72.733"
             />

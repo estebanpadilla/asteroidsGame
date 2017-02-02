@@ -8,17 +8,17 @@ function AppManager(goManager, levelManager) {
     this.goManager = goManager;
     this.goManager.appManager = this;
 
-    this.scoreTitle = null;//document.getElementById('scoreTitle');
-    this.levelTitle = null;//document.getElementById('levelTitle');
-    this.startBtn = null;// document.getElementById('playBtn');
-    this.title = null;//document.getElementById('title');
-    this.subtitle1 = null;//document.getElementById('subtitle1');
-    this.subtitle2 = null;//document.getElementById('subtitle2');
-    this.text = null;//document.getElementById('text');
-    this.line = null;//document.getElementById('line');
-    this.github = null;//document.getElementById('github');
-    this.twitter = null;// document.getElementById('twitter');
-    this.livesTitle = null;//document.getElementById('livesTitle');
+    this.scoreTitle = null;
+    this.levelTitle = null;
+    this.startBtn = null;
+    this.title = null;
+    this.subtitle1 = null;
+    this.subtitle2 = null;
+    this.text = null;
+    this.line = null;
+    this.github = null;
+    this.twitter = null;
+    this.livesTitle = null;
 
     this.lives = 1;
     this.score = 0;
