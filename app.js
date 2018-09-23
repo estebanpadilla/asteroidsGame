@@ -15,8 +15,9 @@ function init() {
     function update() {
         stats.begin();
 
-        goManager.update();
-
+        if (!appManager.isShowingInformation) {
+            goManager.update();
+        }
         stats.end();
         requestId = requestAnimationFrame(update);
     }
@@ -33,10 +34,21 @@ function init() {
     appManager.line = document.getElementById('line');
     appManager.github = document.getElementById('github');
     appManager.twitter = document.getElementById('twitter');
+    appManager.information = document.getElementById('information');
+    appManager.informationView = document.getElementById('informationView');
+    appManager.informationPath = document.getElementById('informationPath');
     appManager.livesTitle = document.getElementById('livesTitle');
     appManager.github.addEventListener('click', appManager.onGithub, false);
     appManager.twitter.addEventListener('click', appManager.onTwitter, false);
+    appManager.information.onclick = onInformation;
+    appManager.informationView.style.opacity = 0;
     appManager.startBtn.onclick = startBtnClick;
+
+
+    function onInformation(e) {
+        console.log('in');
+        appManager.onInformation(e);
+    }
 
     function startBtnClick(e) {
         appManager.startBtnClick(e);

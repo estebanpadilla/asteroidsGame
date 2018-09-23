@@ -159,29 +159,30 @@ Alien.prototype.rotate = function () {
 };
 
 Alien.prototype.checkBoundaries = function () {
-    // if (this.position.x > (window.innerWidth + this.width) ||
-    //     this.position.x < (0 - this.width) ||
-    //     this.position.y > (window.innerHeight + this.height) ||
-    //     this.position.y < (0 - this.height)) {
-    //     this.remove();
-    // }
-
-
-    if (this.position.x > (window.innerWidth + this.width)) {
-        this.position.x = (0 - this.width);
+    if (this.position.x > (window.innerWidth + this.width) ||
+        this.position.x < (0 - this.width) ||
+        this.position.y > (window.innerHeight + this.height) ||
+        this.position.y < (0 - this.height)) {
+        this.remove();
     }
 
-    if (this.position.x < (0 - this.width)) {
-        this.position.x = window.innerWidth;
-    }
-
-    if (this.position.y > (window.innerHeight + this.height)) {
-        this.position.y = (0 - this.height);
-    }
-
-    if (this.position.y < (0 - this.height)) {
-        this.position.y = window.innerHeight;
-    }
+    /*
+        if (this.position.x > (window.innerWidth + this.width)) {
+            this.position.x = (0 - this.width);
+        }
+    
+        if (this.position.x < (0 - this.width)) {
+            this.position.x = window.innerWidth;
+        }
+    
+        if (this.position.y > (window.innerHeight + this.height)) {
+            this.position.y = (0 - this.height);
+        }
+    
+        if (this.position.y < (0 - this.height)) {
+            this.position.y = window.innerHeight;
+        }
+        */
 }
 
 Alien.prototype.remove = function () {

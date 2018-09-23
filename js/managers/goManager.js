@@ -23,6 +23,7 @@ function GOManager() {
     this.poolBullets = new Map();
     this.poolAliens = new Map;
     this.poolAlienBullets = new Map();
+    this.poolMissiles = new Map();
 
     this.alientTimer = 0;
 }
@@ -69,8 +70,8 @@ GOManager.prototype.update = function () {
 
         for (let alien of this.poolAliens.values()) {
             if (hitRectOnRect(asteroid.getBounds(), alien.getBounds())) {
-                this.addAsteroidOnBulletHit(asteroid);
-                alien.remove()
+                //this.addAsteroidOnBulletHit(asteroid);
+                //alien.remove()
                 break;
             }
         }
@@ -100,7 +101,7 @@ GOManager.prototype.update = function () {
                         if (hitPointOnRect(bullet.position.x, bullet.position.y, this.ship.getBounds())) {
                             if (this.appManager.shipHit()) {
                                 bullet.remove();
-                                // this.ship.reset();
+                                this.ship.reset();
                             }
                             break;
                         }
@@ -111,6 +112,10 @@ GOManager.prototype.update = function () {
 
     }
 
+    for (let missile of this.poolMissiles.values()) {
+        missile.update();
+    }
+
     if (this.ship != null) {
         this.ship.update();
     }
@@ -118,8 +123,6 @@ GOManager.prototype.update = function () {
 
 //Add Methods
 GOManager.prototype.addShip = function () {
-    console.log('add ship');
-
     this.ship = Ship(this.goCounter, Vector(window.innerWidth / 2, window.innerHeight / 2), 40, 40, this.appManager.shipColor, this, this.svg);
 }
 
@@ -128,6 +131,13 @@ GOManager.prototype.addBullet = function () {
     this.goCounter++;
     let bullet = Bullet(this.goCounter, shootPosition, this.ship.angle, (7 + this.ship.velocityMag), this.ship.color, this, false, this.svg);
     this.poolBullets.set(this.goCounter, bullet);
+}
+
+GOManager.prototype.addMissile = function () {
+    let shootPosition = Vector((this.ship.position.x + (this.ship.width / 2) - 5), (this.ship.position.y + (this.ship.height / 2) - 3));
+    this.goCounter++;
+    let missile = Missile(this.goCounter, shootPosition, this.ship.angle, (1 + this.ship.velocityMag), this.ship.color, this, this.svg);
+    this.poolMissiles.set(this.goCounter, missile);
 }
 
 GOManager.prototype.addAlienBullet = function (alien) {
@@ -148,7 +158,7 @@ GOManager.prototype.addAlienBullet = function (alien) {
 
     // let shootPosition = Vector(alien.position.x, alien.position.y);
     this.goCounter++;
-    let bullet = Bullet(this.goCounter, position, direction, 5, alien.color, this, true, this.svg);
+    let bullet = Bullet(this.goCounter, position, direction, 4, alien.color, this, true, this.svg);
     this.poolAlienBullets.set(this.goCounter, bullet);
 }
 
@@ -177,8 +187,9 @@ GOManager.prototype.addAsteroids = function (levelData) {
         this.poolAsteroids.set(this.goCounter, asteroid);
     }
 
-    clearTimeout(this.alientTimer);
-    this.startAlienAttack();
+    this.addAlien();
+    //clearTimeout(this.alientTimer);
+    //this.startAlienAttack();
 }
 
 GOManager.prototype.addAsteroidOnBulletHit = function (asteroid) {
@@ -217,8 +228,6 @@ GOManager.prototype.addAsteroidOnBulletHit = function (asteroid) {
 
 GOManager.prototype.addAlien = function () {
 
-    console.log('add alien');
-
     let y = 0;
     let x = 0;
     let direction = 0;
@@ -238,9 +247,9 @@ GOManager.prototype.addAlien = function () {
     let position = Vector(x, y);
 
     this.goCounter++;
-    let alien = Alien(this.goCounter, position, direction, randomBtween(1, 4), randomBtween(1, 4), this.appManager.alienColor, this, this.svg);
+    let alien = Alien(this.goCounter, position, direction, randomBtween(3, 4), randomBtween(1, 4), this.appManager.alienColor, this, this.svg);
     this.poolAliens.set(this.goCounter, alien);
-    this.startAlienAttack();
+    //this.startAlienAttack();
 }
 
 //Remove Methods
@@ -322,6 +331,15 @@ GOManager.prototype.startAlienAttack = function () {
 
         // addA.call(_this, _this);
         // fx.call(_this, _this);
-    }, 20000);
+    }, 2000);
 }
+
+GOManager.prototype.lookForAlientTarget = function () {
+    if (this.poolAliens.size > 0) {
+        let aliens = this.poolAliens.values();
+        return aliens.next().value;
+    }
+}
+
+
 

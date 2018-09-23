@@ -53,7 +53,7 @@ function Ship(id, position, width, height, color, goManager, svg) {
 Ship.prototype.update = function () {
 
     this.velocityMag = this.velocity.magnitude();
-    console.log(this.velocityMag);
+    // console.log(this.velocityMag);
 
 
     // this.velocity.setComponents(this.velocity.angle(), 3);
@@ -172,9 +172,6 @@ Ship.prototype.render = function () {
     this.group = document.createElementNS(xmlns, 'g');
     this.svg.appendChild(this.group);
 
-
-
-
     this.polygone = document.createElementNS(xmlns, 'polygon');
     this.polygone.setAttribute('fill', this.color);
     this.polygone.setAttribute('points', '12.5,27.5 22.5,27.5 22.5,22.5 32.5,22.5 32.5,17.5 22.5,17.5 22.5,12.5 12.5,12.5 12.5,7.5 7.5,7.5 7.5,32.5 12.5,32.5');
@@ -236,10 +233,12 @@ Ship.prototype.getBounds = function () {
 Ship.prototype.reset = function () {
     // this.polygone.setAttribute('points', '');
     this.position = Vector(this.originalPos.x, this.originalPos.y);
-    this.angle = 0
+    // this.angle = 0
     this.velocity = Vector();
     this.isInvisible = true;
     this.group.style.opacity = 0.5;
+    this.group.style.transition = 'opacity 0.5s ease-out 0.1s';
+
     let _this = this;
     this.timer = setTimeout(function () {
         _this.hideInvisible(_this);
@@ -266,6 +265,9 @@ Ship.prototype.keydownHandler = function (key) {
         case 32:
             this.doShoot = true;
             break;
+        case 77:
+            this.shootMissile();
+            break;
         default:
             break;
     }
@@ -288,4 +290,8 @@ Ship.prototype.keyupHandler = function (key) {
         default:
             break;
     }
+}
+
+Ship.prototype.shootMissile = function () {
+    this.goManager.addMissile();
 }

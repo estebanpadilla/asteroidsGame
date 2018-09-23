@@ -18,7 +18,10 @@ function AppManager(goManager, levelManager) {
     this.line = null;
     this.github = null;
     this.twitter = null;
+    this.information = null;
+    this.informationView = null;
     this.livesTitle = null;
+    this.isShowingInformation = false;
 
     this.lives = 1;
     this.score = 0;
@@ -35,11 +38,16 @@ function AppManager(goManager, levelManager) {
     this.alienColor = '#0098AB';
 
     this.levelManager.createLevel();
+
+    this.informationPath;
+    this.xPath = 'M51.1,0c-27.6,0-50,22.4-50,50c0,27.6,22.4,50,50,50c27.6,0,50-22.4,50-50C101.1,22.4,78.7,0,51.1,0z M74.6,65.8l-7.8,7.8L51.1,57.8L35.3,73.6l-7.8-7.8L43.3,50L27.5,34.2l7.8-7.8l15.8,15.8l15.8-15.8l7.8,7.8L58.8,50L74.6,65.8z';
+    this.infoPath = 'M50,0C22.4,0,0,22.4,0,50c0,27.6,22.4,50,50,50c27.6,0,50-22.4,50-50C100,22.4,77.6,0,50,0z M55.5,75.8h-11 V39.2h11V75.8z M55.5,34.8h-11V24.7h11V34.8z';
+
 }
 
 AppManager.prototype.startBtnClick = function (e) {
 
-    this.lives = 3;
+    this.lives = 1;
     this.score = 0;
     this.scoreForLife = 0;
     this.levelManager.level = 0;
@@ -115,7 +123,6 @@ AppManager.prototype.shipHit = function () {
     return true;
 }
 
-
 AppManager.prototype.gameEnd = function () {
 
     this.goManager.ship.remove();
@@ -134,4 +141,19 @@ AppManager.prototype.gameEnd = function () {
     this.subtitle2.style.transition = 'opacity 1s ease-in';
     this.text.style.transition = 'opacity 1s ease-in';
     this.line.style.transition = 'opacity 1s ease-in';
+}
+
+AppManager.prototype.onInformation = function () {
+
+    if (this.isShowingInformation) {
+        this.isShowingInformation = false;
+        this.informationView.style.opacity = 0;
+        this.informationView.style.transition = 'opacity 0.15s ease-out';
+        this.informationPath.setAttribute('d', this.infoPath);
+    } else {
+        this.isShowingInformation = true;
+        this.informationView.style.opacity = 1;
+        this.informationView.style.transition = 'opacity 0.15s ease-in';
+        this.informationPath.setAttribute('d', this.xPath);
+    }
 }
